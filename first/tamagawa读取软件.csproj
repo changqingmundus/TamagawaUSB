@@ -92,6 +92,7 @@
     <Compile Include="DialControl.xaml.cs">
       <DependentUpon>DialControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SerialPortManager.cs" />
     <EmbeddedResource Include="main.resx">
       <DependentUpon>main.cs</DependentUpon>
     </EmbeddedResource>

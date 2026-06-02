@@ -126,7 +126,8 @@
             "230400",
             "460800",
             "921600",
-            "2000000"});
+            "2000000",
+            "2500000"});
             this.comboBox2.Location = new System.Drawing.Point(173, 35);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(82, 20);

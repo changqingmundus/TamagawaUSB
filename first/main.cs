@@ -70,6 +70,14 @@ namespace TamagawaUSB
             comboBox1.Items.Clear();
             comboBox1.Items.AddRange(ports);
         }
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+        private void comboBoxBaud(object sender, EventArgs e)
+        {
+
+        }
 
         private void button4_Click(object sender, EventArgs e)
         {
@@ -182,7 +190,7 @@ namespace TamagawaUSB
                      ((uint)rx[3] << 8) |
                      rx[4];
 
-                abm &= 0xFFFF;
+                abm >>= 8;
 
                 byte recvCrc = rx[5];
 
@@ -309,52 +317,15 @@ namespace TamagawaUSB
             }
         }
 
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+        private void elementHost1_ChildChanged(object sender, System.Windows.Forms.Integration.ChildChangedEventArgs e)
         {
 
         }
 
-        public static class SerialPortManager
-        {
-            public static SerialPort sp;
-            public static bool OpenPort(string comPort, int baudRate, SerialDataReceivedEventHandler dataReceivedHandler)
-            {
-                try
-                {
-                    if (sp != null && sp.IsOpen)
-                        sp.Close();
-                    sp = new SerialPort(comPort, baudRate, Parity.None, 8, StopBits.One);
-                    sp.Handshake = Handshake.None;   // 统一设置
-                    sp.Open();
-                    return true;
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine("打开串口失败: " + ex.Message);
-                    return false;
-                }
-            }
-            public static void ClosePort()
-            {
-                if (sp != null && sp.IsOpen)
-                {
-                    sp.Close();
-                    sp.Dispose(); // 可选，释放资源
-                    sp = null;
-                }
-            }
-            public static void WriteData(byte[] data)
-            {
-                if (sp != null && sp.IsOpen)
-                {
-                    sp.Write(data, 0, data.Length);
-                }
-                else
-                {
-                    throw new InvalidOperationException("串口未打开");
-                }
-            }
-        }
         private byte CalcCRC(byte[] data)
         {
             byte crc = 0;
@@ -373,10 +344,6 @@ namespace TamagawaUSB
             }
 
             return crc;
-        }
-        private void elementHost1_ChildChanged(object sender, System.Windows.Forms.Integration.ChildChangedEventArgs e)
-        {
-
         }
         private void ContinuousTimer_Tick(object sender, EventArgs e)
         {
