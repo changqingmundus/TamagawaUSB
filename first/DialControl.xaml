@@ -18,7 +18,7 @@
 
                 <Grid Width="300" Height="300">
                     <Grid.Resources>
-                        <Grid x:Key="Sector30Deg" x:Shared="False" Width="300" Height="300">
+                        <Grid x:Key="Sector30Deg" x:Shared="false" Width="300" Height="300">
                             <Line X1="150" Y1="12" X2="150" Y2="28" Stroke="#FF000000" StrokeThickness="1.5"/>
 
                             <Line X1="150" Y1="12" X2="150" Y2="18" Stroke="#FF555555" StrokeThickness="0.6">

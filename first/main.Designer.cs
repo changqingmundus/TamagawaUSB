@@ -49,7 +49,7 @@
             this.button1.TabIndex = 0;
             this.button1.Text = "读取单圈数据";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.Read_Singleturn);
             // 
             // button2
             // 
@@ -59,7 +59,7 @@
             this.button2.TabIndex = 5;
             this.button2.Text = "读取多圈数据";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button2.Click += new System.EventHandler(this.Read_Multiturn);
             // 
             // button3
             // 
@@ -69,7 +69,7 @@
             this.button3.TabIndex = 6;
             this.button3.Text = "读取全部数据";
             this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.button3.Click += new System.EventHandler(this.Read_Alldata);
             // 
             // textBox1
             // 
@@ -81,7 +81,7 @@
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.textBox1.Size = new System.Drawing.Size(348, 717);
             this.textBox1.TabIndex = 10;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.textBox1.TextChanged += new System.EventHandler(this.Messagesbox_TextChanged);
             // 
             // button6
             // 
@@ -91,7 +91,7 @@
             this.button6.TabIndex = 11;
             this.button6.Text = "清除接受区";
             this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
+            this.button6.Click += new System.EventHandler(this.Clean_Messagebox);
             // 
             // comboBox1
             // 
@@ -101,8 +101,8 @@
             this.comboBox1.Size = new System.Drawing.Size(121, 20);
             this.comboBox1.TabIndex = 12;
             this.comboBox1.Text = "串口号";
-            this.comboBox1.DropDown += new System.EventHandler(this.comboBox1_DropDown);
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.comboBox1.DropDown += new System.EventHandler(this.Serial_Port_DropDown);
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.Serial_Port_Select);
             // 
             // button4
             // 
@@ -112,7 +112,7 @@
             this.button4.TabIndex = 13;
             this.button4.Text = "打开串口";
             this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.button4.Click += new System.EventHandler(this.Open_SerialPort);
             // 
             // comboBox2
             // 
@@ -133,8 +133,8 @@
             this.comboBox2.Size = new System.Drawing.Size(82, 20);
             this.comboBox2.TabIndex = 14;
             this.comboBox2.Text = "波特率";
-            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
-            this.comboBox2.Click += new System.EventHandler(this.comboBoxBaud);
+            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.Baud_SelectedIndexChanged);
+            this.comboBox2.Click += new System.EventHandler(this.Baud);
             // 
             // elementHost1
             // 
@@ -143,7 +143,7 @@
             this.elementHost1.Size = new System.Drawing.Size(310, 310);
             this.elementHost1.TabIndex = 15;
             this.elementHost1.Text = "elementHost1";
-            this.elementHost1.ChildChanged += new System.EventHandler<System.Windows.Forms.Integration.ChildChangedEventArgs>(this.elementHost1_ChildChanged);
+            this.elementHost1.ChildChanged += new System.EventHandler<System.Windows.Forms.Integration.ChildChangedEventArgs>(this.Element_WPF_Obj);
             this.elementHost1.Child = null;
             // 
             // checkBox1
@@ -155,7 +155,7 @@
             this.checkBox1.TabIndex = 16;
             this.checkBox1.Text = "Continuous";
             this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.Continous_Read);
             // 
             // btnClickThis
             // 
@@ -175,8 +175,8 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "btnClickThis";
             this.Text = "Tamagawa-USB";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form_FormClosing);
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
+            this.Load += new System.EventHandler(this.Main_Form);
             this.ResumeLayout(false);
             this.PerformLayout();
 

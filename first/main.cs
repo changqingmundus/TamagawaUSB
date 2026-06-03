@@ -22,7 +22,7 @@ namespace TamagawaUSB
 {
     public partial class btnClickThis : Form
     {
-        private DialControl dialControl1;   // 成员变量声明（正确位置)
+        private DialControl dialControl1;   // 成员变量声明
         private Timer continuousTimer;   // 用于连续读取的定时器
         private bool showDebugInfo = true; // 是否输出调试信息到文本框
 
@@ -42,7 +42,7 @@ namespace TamagawaUSB
             continuousTimer.Interval = 100; 
             continuousTimer.Tick += ContinuousTimer_Tick;
         }
-        private void Form1_Load(object sender, EventArgs e)
+        private void Main_Form(object sender, EventArgs e)
         {
             // 获取所有可用串口名称（例如 "COM1", "COM2" 等）
             string[] ports = System.IO.Ports.SerialPort.GetPortNames();
@@ -50,12 +50,12 @@ namespace TamagawaUSB
             comboBox1.Items.AddRange(ports);
 
         }
-        private void Form_FormClosing(object sender, FormClosingEventArgs e)
+        private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
             continuousTimer.Stop();
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void Serial_Port_Select(object sender, EventArgs e)
         {
             // 确保用户确实选择了一个项，而不是清空了选择
             if (comboBox1.SelectedItem != null)
@@ -63,23 +63,38 @@ namespace TamagawaUSB
                 string selectedPort = comboBox1.SelectedItem.ToString();
             }
         }
-        private void comboBox1_DropDown(object sender, EventArgs e)
+        private void Serial_Port_DropDown(object sender, EventArgs e)
         {
             // 刷新串口列表
             string[] ports = System.IO.Ports.SerialPort.GetPortNames();
             comboBox1.Items.Clear();
             comboBox1.Items.AddRange(ports);
         }
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        private void Baud_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
-        private void comboBoxBaud(object sender, EventArgs e)
+        private void Baud(object sender, EventArgs e)
         {
 
         }
+        private void Continous_Read(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked)
+            {
+                // 开启连续读取
+                showDebugInfo = false;           // 连续模式下不输出文本
+                continuousTimer.Start();
+            }
+            else
+            {
+                // 关闭连续读取
+                continuousTimer.Stop();
+                showDebugInfo = true;            // 恢复显示
+            }
+        }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void Open_SerialPort(object sender, EventArgs e)
         {
             // 判断当前串口是否已经打开
             if (SerialPortManager.sp != null && SerialPortManager.sp.IsOpen)
@@ -125,12 +140,12 @@ namespace TamagawaUSB
                 }
             }
         }
-        private void button6_Click(object sender, EventArgs e)
+        private void Clean_Messagebox(object sender, EventArgs e)
         {
             textBox1.Clear();
             textBox1.AppendText("【已清除】" + Environment.NewLine);
         }
-        private void button1_Click(object sender, EventArgs e)
+        private void Read_Singleturn(object sender, EventArgs e)
         {
             // 临时保存并覆盖显示标志，确保这次读取会输出信息
             bool oldFlag = showDebugInfo;
@@ -138,7 +153,7 @@ namespace TamagawaUSB
             PerformSingleRead();
             showDebugInfo = oldFlag;
         }
-        private void button2_Click(object sender, EventArgs e)
+        private void Read_Multiturn(object sender, EventArgs e)
         {
             if (SerialPortManager.sp == null || !SerialPortManager.sp.IsOpen)
             {
@@ -214,7 +229,7 @@ namespace TamagawaUSB
                 MessageBox.Show("通讯错误：" + ex.Message);
             }
         }
-        private void button3_Click(object sender, EventArgs e)
+        private void Read_Alldata(object sender, EventArgs e)
         {
             if (SerialPortManager.sp == null || !SerialPortManager.sp.IsOpen)
             {
@@ -282,7 +297,7 @@ namespace TamagawaUSB
                     ((uint)rx[6] << 16) |
                     ((uint)rx[7] << 8) |
                     rx[8];
-
+                abm >>= 8;
                 byte almc = rx[9];
 
                 byte recvCrc = rx[10];
@@ -317,11 +332,11 @@ namespace TamagawaUSB
             }
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void Messagesbox_TextChanged(object sender, EventArgs e)
         {
 
         }
-        private void elementHost1_ChildChanged(object sender, System.Windows.Forms.Integration.ChildChangedEventArgs e)
+        private void Element_WPF_Obj(object sender, System.Windows.Forms.Integration.ChildChangedEventArgs e)
         {
 
         }
@@ -426,20 +441,6 @@ namespace TamagawaUSB
                     MessageBox.Show("通讯错误：" + ex.Message);
             }
         }
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBox1.Checked)
-            {
-                // 开启连续读取
-                showDebugInfo = false;           // 连续模式下不输出文本
-                continuousTimer.Start();
-            }
-            else
-            {
-                // 关闭连续读取
-                continuousTimer.Stop();
-                showDebugInfo = true;            // 恢复显示
-            }
-        }
+
     }
 }
